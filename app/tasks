@@ -2,3 +2,18 @@
 
 1) Setup the autocomplete text view with choises of api keys. Put Api keys into the "strings" folder
 as an array.
+2) Setup Hilt, Setup RetrofitModule using DI.
+3) Setup Room.
+4) Add Paging library v3.
+5)
+
+
+Repository:
+ 1) RemoteDataSource
+ 2) LocalDataSource
+
+ Observing data from local storage Flows/LiveData.
+
+ Fetch - insert into database.
+
+ Flows/LiveData -> UI updated after the operation in the database.

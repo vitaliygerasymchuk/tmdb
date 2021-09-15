@@ -9,6 +9,8 @@ import app.tmdb.test.ui.AbsFragment
 
 class LoginFragment : AbsFragment<FragmentLoginBinding>() {
 
+    private lateinit var viewModel: Any
+
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -23,6 +25,4 @@ class LoginFragment : AbsFragment<FragmentLoginBinding>() {
 
         }
     }
-
-    private fun observeViewModel() {}
 }
