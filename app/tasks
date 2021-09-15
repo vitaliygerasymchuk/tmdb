@@ -2,11 +2,10 @@
 
 1) Setup the autocomplete text view with choises of api keys. Put Api keys into the "strings" folder
 as an array.
-2) Setup Hilt, Setup RetrofitModule using DI.
+2) Setup Hilt, Setup RetrofitModule using DI. Setup Moschi.
 3) Setup Room.
 4) Add Paging library v3.
-5)
-
+5) Setup Navigation Arch component.
 
 Repository:
  1) RemoteDataSource
