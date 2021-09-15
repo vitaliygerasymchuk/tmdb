@@ -20,7 +20,7 @@ class LoginFragment : AbsFragment<FragmentLoginBinding>() {
 
     private fun initBinding() {
         with(binding) {
-            textView
+
         }
     }
 

@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Tmdb</string>
 
-    <string-array name="TODO">
+    <string-array name="api_keys">
         <item>1</item>
         <item>2</item>
     </string-array>
+
 </resources>
