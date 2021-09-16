@@ -6,6 +6,14 @@ import retrofit2.http.GET
 
 interface Api {
 
-    @GET("some")
-    fun get(): Call<ResponseBody>
+    @GET("/authentication/guest_session/new")
+    fun createGuestSession(): Call<ResponseBody>
+
+    @GET("/authentication/token/new")
+    fun createRequestToken(): Call<ResponseBody>
+
+
+    ///Authenticate user via TMD web URL:
+
+//    https://www.themoviedb.org/authenticate/REQUEST_TOKEN
 }

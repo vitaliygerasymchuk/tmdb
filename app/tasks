@@ -2,10 +2,16 @@
 
 1) Setup the autocomplete text view with choises of api keys. Put Api keys into the "strings" folder
 as an array.
-2) Setup Hilt, Setup RetrofitModule using DI. Setup Moschi.
 3) Setup Room.
 4) Add Paging library v3.
 5) Setup Navigation Arch component.
+6) Create LoginFragment with 2 buttons -> "Login As A Guest", "Login via TMDB account".
+"Login As A Guest" - will just generate a guest session. This is enough for a basic application usage.
+"Login via TMDB account" - make a request to (/authentication/token/new) and wait for the response. After we've got the
+response - redirect user here ("https://www.themoviedb.org/authenticate/{REQUEST_TOKEN}"). This page will show
+website with some buttons. After user clicks "Approve", the web page should contain the Authentication-Callback header with some url.
+Having completed steps above - fire the /authentication/session/new request. It will generate the session_id which should be
+used in order to get data from the TMDB.
 
 Repository:
  1) RemoteDataSource
@@ -16,3 +22,7 @@ Repository:
  Fetch - insert into database.
 
  Flows/LiveData -> UI updated after the operation in the database.
+
+
+
+
