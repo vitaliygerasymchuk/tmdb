@@ -1,4 +1,8 @@
 package app.tmdb.test.data.local
 
-class Tmdb {
+import androidx.room.Database
+import androidx.room.RoomDatabase
+
+@Database(entities = [], version = 1, exportSchema = true)
+abstract class Tmdb : RoomDatabase() {
 }
