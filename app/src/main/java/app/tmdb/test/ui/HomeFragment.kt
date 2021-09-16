@@ -1,14 +1,11 @@
-package app.tmdb.test.ui.auth
+package app.tmdb.test.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
-import app.tmdb.test.databinding.FragmentLoginBinding
-import app.tmdb.test.ui.AbsFragment
+import app.tmdb.test.databinding.FragmentHomeBinding
 
-class LoginFragment : AbsFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
-    private val viewModel: LoginViewModel by viewModels()
+class HomeFragment : AbsFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -21,4 +18,6 @@ class LoginFragment : AbsFragment<FragmentLoginBinding>(FragmentLoginBinding::in
     override fun setUpObservers() {
         TODO("Not yet implemented")
     }
+
+
 }
