@@ -5,7 +5,9 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import app.tmdb.test.databinding.FragmentLoginBinding
 import app.tmdb.test.ui.AbsFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : AbsFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
     private val viewModel: LoginViewModel by viewModels()
@@ -13,7 +15,7 @@ class LoginFragment : AbsFragment<FragmentLoginBinding>(FragmentLoginBinding::in
     override fun setUp() {
         with(binding) {
             val adapter = ArrayAdapter(requireContext(),
-                R.layout.simple_dropdown_item_1line,
+                android.R.layout.simple_dropdown_item_1line,
                 resources.getStringArray(app.tmdb.test.R.array.api_keys))
 
             apiKeyAutocomplete.setAdapter(adapter)
