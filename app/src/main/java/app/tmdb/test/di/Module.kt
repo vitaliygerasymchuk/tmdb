@@ -6,8 +6,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
+
 @Singleton
-object RetrofitModule {
+object Module {
 
     @Provides
     fun provideApi(): Api {
