@@ -1,4 +1,4 @@
-package app.tmdb.test.ui.auth
+package app.tmdb.test.ui.login
 
 import androidx.fragment.app.viewModels
 import app.tmdb.test.databinding.FragmentLoginBinding
