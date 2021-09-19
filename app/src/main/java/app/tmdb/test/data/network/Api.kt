@@ -9,9 +9,8 @@ interface Api {
     @GET("/authentication/guest_session/new")
     fun createGuestSession(): Call<ResponseBody>
 
-    @GET("/authentication/token/new")
-    fun createRequestToken(): Call<ResponseBody>
-
+    @GET("authentication/token/new")
+    fun getRequestToken(): Call<RequestTokenResponse>
 
     ///Authenticate user via TMD web URL:
 
