@@ -7,18 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-abstract class AbsFragment<V : ViewBinding> : Fragment() {
+abstract class AbsFragment<V : ViewBinding>(private val inflater: (LayoutInflater, ViewGroup?, Boolean) -> V) : Fragment() {
 
-    protected lateinit var binding: V
+    private var _binding: V? = null
+    protected val binding: V get() = _binding!!
 
-    abstract fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?): V
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = inflateBinding(inflater, container)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = inflater(inflater, container, false)
+        setUp()
+        setUpObservers()
         return binding.root
     }
+
+    abstract fun setUp()
+
+    abstract fun setUpObservers()
+
 }
