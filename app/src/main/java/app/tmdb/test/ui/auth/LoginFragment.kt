@@ -1,8 +1,8 @@
 package app.tmdb.test.ui.auth
 
-import android.R
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
+import app.tmdb.test.R
 import app.tmdb.test.databinding.FragmentLoginBinding
 import app.tmdb.test.ui.AbsFragment
 
@@ -13,8 +13,8 @@ class LoginFragment : AbsFragment<FragmentLoginBinding>(FragmentLoginBinding::in
     override fun setUp() {
         with(binding) {
             val adapter = ArrayAdapter(requireContext(),
-                R.layout.simple_dropdown_item_1line,
-                resources.getStringArray(app.tmdb.test.R.array.api_keys))
+                android.R.layout.simple_dropdown_item_1line,
+                resources.getStringArray(R.array.api_keys))
 
             apiKeyAutocomplete.setAdapter(adapter)
             apiKeyAutocomplete.setOnItemClickListener { _, _, position, _ ->
