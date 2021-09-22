@@ -22,6 +22,9 @@ class UserData @Inject constructor(private val preferences: PrefsManager) {
             preferences.putString(USER_SESSION_TOKEN, value)
         }
 
+    /**
+     * Expiry Time for the guest session token
+     */
     var expiryDateTime: String? = preferences.getString(SESSION_TOKEN_EXPIRY_TIME)
         set(value) {
             field = value
