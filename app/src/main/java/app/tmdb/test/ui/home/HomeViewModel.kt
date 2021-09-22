@@ -8,7 +8,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val userData: UserData) : ViewModel() {
 
-    fun isSessionValid(): Boolean = userData.isUserSessionToken()
+    fun isSessionValid(): Boolean = userData.isUserSessionTokenValid()
 
     fun isGuestSessionValid(): Boolean = userData.isGuestSessionTokenValid()
 

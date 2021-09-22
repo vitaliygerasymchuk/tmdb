@@ -38,7 +38,7 @@ class UserData @Inject constructor(private val preferences: PrefsManager) {
         return !guestSessionToken.isNullOrEmpty() && !expiryDateTime.isNullOrEmpty() && hasTokenExpired()
     }
 
-    fun isUserSessionToken(): Boolean {
+    fun isUserSessionTokenValid(): Boolean {
         return !userSessionToken.isNullOrEmpty()
     }
 
