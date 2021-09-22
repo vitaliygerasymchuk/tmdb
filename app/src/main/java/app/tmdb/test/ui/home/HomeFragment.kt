@@ -26,9 +26,7 @@ class HomeFragment : AbsFragment<FragmentHomeBinding>(FragmentHomeBinding::infla
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (!viewModel.isSessionValid()) {
-            navigate(HomeFragmentDirections.toLogin())
-        }
+        if (!viewModel.isSessionValid() && !viewModel.isGuestSessionValid()) navigate(HomeFragmentDirections.toLogin())
     }
 
 

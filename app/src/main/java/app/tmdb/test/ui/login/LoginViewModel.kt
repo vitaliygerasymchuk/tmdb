@@ -41,7 +41,7 @@ class LoginViewModel @Inject constructor(private val userData: UserData, private
             val result = repository.loginAsGuest()
 
             if (result is Result.Success) {
-                userData.sessionToken = result.data.guestSessionId
+                userData.guestSessionToken = result.data.guestSessionId
                 userData.expiryDateTime = result.data.expiryDateTime
                 _isSessionActive.value = true
             } else {
@@ -55,7 +55,7 @@ class LoginViewModel @Inject constructor(private val userData: UserData, private
             val result = repository.loginWithAccount()
 
             if (result is Result.Success) {
-                userData.sessionToken = result.data.sessionId
+                userData.userSessionToken = result.data.sessionId
                 _isSessionActive.value = true
             } else {
                 _loginError.value = R.string.error_account_login

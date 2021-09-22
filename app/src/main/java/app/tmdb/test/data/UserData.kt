@@ -10,10 +10,16 @@ import javax.inject.Inject
 @SuppressLint("NewApi")
 class UserData @Inject constructor(private val preferences: PrefsManager) {
 
-    var sessionToken: String? = preferences.getString(SESSION_TOKEN)
+    var guestSessionToken: String? = preferences.getString(GUEST_SESSION_TOKEN)
         set(value) {
             field = value
-            preferences.putString(SESSION_TOKEN, value)
+            preferences.putString(GUEST_SESSION_TOKEN, value)
+        }
+
+    var userSessionToken: String? = preferences.getString(USER_SESSION_TOKEN)
+        set(value) {
+            field = value
+            preferences.putString(USER_SESSION_TOKEN, value)
         }
 
     var expiryDateTime: String? = preferences.getString(SESSION_TOKEN_EXPIRY_TIME)
@@ -28,8 +34,12 @@ class UserData @Inject constructor(private val preferences: PrefsManager) {
             preferences.putString(REQUEST_TOKEN, value)
         }
 
-    fun isSessionTokenValid(): Boolean {
-        return !sessionToken.isNullOrEmpty() && !expiryDateTime.isNullOrEmpty() && hasTokenExpired()
+    fun isGuestSessionTokenValid(): Boolean {
+        return !guestSessionToken.isNullOrEmpty() && !expiryDateTime.isNullOrEmpty() && hasTokenExpired()
+    }
+
+    fun isUserSessionToken(): Boolean {
+        return !userSessionToken.isNullOrEmpty()
     }
 
     private fun hasTokenExpired(): Boolean {
@@ -43,8 +53,9 @@ class UserData @Inject constructor(private val preferences: PrefsManager) {
     }
 }
 
-private const val SESSION_TOKEN = "SESSION_TOKEN"
+private const val GUEST_SESSION_TOKEN = "GUEST_SESSION_TOKEN"
 private const val SESSION_TOKEN_EXPIRY_TIME = "SESSION_TOKEN_EXPIRY_TIME"
+private const val USER_SESSION_TOKEN = "USER_SESSION_TOKEN"
 const val AUTHENTICATION_GRANTED = "AUTHENTICATION_GRANTED"
 const val APPROVED = "APPROVED"
 const val REQUEST_TOKEN = "REQUEST_TOKEN"
