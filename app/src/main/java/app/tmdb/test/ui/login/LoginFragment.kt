@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import app.tmdb.test.R
 import app.tmdb.test.data.APPROVED
 import app.tmdb.test.data.AUTHENTICATION_GRANTED
@@ -14,6 +13,7 @@ import app.tmdb.test.data.REQUEST_TOKEN
 import app.tmdb.test.databinding.FragmentLoginBinding
 import app.tmdb.test.ui.AbsFragment
 import app.tmdb.test.utils.Loggable
+import app.tmdb.test.utils.navigate
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -55,7 +55,7 @@ class LoginFragment : AbsFragment<FragmentLoginBinding>(FragmentLoginBinding::in
     override fun setUpObservers() {
         viewModel.isSessionActive.observe(viewLifecycleOwner, { isSessionActive ->
             binding.progressBar.visibility = View.GONE
-            if (isSessionActive) findNavController().popBackStack()
+            if (isSessionActive) navigate(LoginFragmentDirections.toHome())
         })
 
         viewModel.loginError.observe(viewLifecycleOwner, { message ->

@@ -4,7 +4,6 @@ import android.Manifest
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import app.tmdb.test.R
 import app.tmdb.test.databinding.FragmentHomeBinding
 import app.tmdb.test.ui.AbsFragment
 import app.tmdb.test.utils.Loggable
@@ -28,7 +27,7 @@ class HomeFragment : AbsFragment<FragmentHomeBinding>(FragmentHomeBinding::infla
         super.onCreate(savedInstanceState)
 
         if (!viewModel.isSessionValid()) {
-            navigate(R.id.loginFragment)
+            navigate(HomeFragmentDirections.toLogin())
         }
     }
 
