@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.navigation.fragment.NavHostFragment
 import app.tmdb.test.R
 import app.tmdb.test.data.APPROVED
 import app.tmdb.test.data.AUTHENTICATION_GRANTED
@@ -14,9 +15,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), Loggable {
 
+    private lateinit var navHost: NavHostFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        navHost = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -28,7 +33,7 @@ class MainActivity : AppCompatActivity(), Loggable {
 
         wasUserAuthenticated?.let {
             if (it == "true") {
-                supportFragmentManager.setFragmentResult(AUTHENTICATION_GRANTED,
+                navHost.childFragmentManager.setFragmentResult(AUTHENTICATION_GRANTED,
                     bundleOf(
                         APPROVED to true,
                         REQUEST_TOKEN to requestToken
