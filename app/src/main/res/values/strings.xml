@@ -2,8 +2,8 @@
     <string name="app_name">Tmdb</string>
 
     <string-array name="api_keys">
-        <item>1</item>
-        <item>2</item>
+        <item>API_KEY ONE</item>
+        <item>API_KEY_TWO</item>
     </string-array>
     <string name="main_fragment">Main Fragment</string>
     <string name="home_fragment">Home Fragment</string>
