@@ -22,11 +22,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <intent-filter android:label="@string/login_with_account">
-                <action android:name="tmdb" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="tmdb" android:host="www.themoviedb.org" />
+
+                <data android:scheme="mycustomscheme" />
             </intent-filter>
 
         </activity>

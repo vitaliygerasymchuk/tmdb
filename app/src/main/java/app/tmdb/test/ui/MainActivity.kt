@@ -1,15 +1,19 @@
 package app.tmdb.test.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import app.tmdb.test.R
-import com.google.android.material.snackbar.Snackbar
+import app.tmdb.test.data.APPROVED
+import app.tmdb.test.data.AUTHENTICATION_GRANTED
+import app.tmdb.test.data.REQUEST_TOKEN
+import app.tmdb.test.utils.Loggable
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Loggable {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -18,6 +22,19 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
 
-        Toast.makeText(this, "It worked", Toast.LENGTH_SHORT).show()
+        val result = intent?.data
+        val wasUserAuthenticated = result?.getQueryParameter("approved")
+        val requestToken = result?.getQueryParameter("request_token")
+
+        wasUserAuthenticated?.let {
+            if (it == "true") {
+                supportFragmentManager.setFragmentResult(AUTHENTICATION_GRANTED,
+                    bundleOf(
+                        APPROVED to true,
+                        REQUEST_TOKEN to requestToken
+                    ))
+            }
+        } ?: log("Error Authenticating user")
     }
 }
+

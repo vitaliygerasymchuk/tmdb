@@ -22,6 +22,12 @@ class UserData @Inject constructor(private val preferences: PrefsManager) {
             preferences.putString(SESSION_TOKEN_EXPIRY_TIME, value)
         }
 
+    var requestToken: String? = preferences.getString(REQUEST_TOKEN)
+        set(value) {
+            field = value
+            preferences.putString(REQUEST_TOKEN, value)
+        }
+
     fun isSessionTokenValid(): Boolean {
         return !sessionToken.isNullOrEmpty() && !expiryDateTime.isNullOrEmpty() && hasTokenExpired()
     }
@@ -39,3 +45,6 @@ class UserData @Inject constructor(private val preferences: PrefsManager) {
 
 private const val SESSION_TOKEN = "SESSION_TOKEN"
 private const val SESSION_TOKEN_EXPIRY_TIME = "SESSION_TOKEN_EXPIRY_TIME"
+const val AUTHENTICATION_GRANTED = "AUTHENTICATION_GRANTED"
+const val APPROVED = "APPROVED"
+const val REQUEST_TOKEN = "REQUEST_TOKEN"

@@ -24,6 +24,18 @@ class LoginViewModel @Inject constructor(private val userData: UserData, private
     private val _loginError = MutableLiveData<Int>()
     val loginError: LiveData<Int> = _loginError
 
+    fun getRequestToken() {
+        viewModelScope.launch {
+            val result = repository.requestToken()
+
+            if (result is Result.Success) {
+                _requestToken.value = result.data.requestToken
+            } else {
+                _loginError.value = R.string.error_account_login
+            }
+        }
+    }
+
     fun loginAsGuest() {
         viewModelScope.launch {
             val result = repository.loginAsGuest()
@@ -43,10 +55,15 @@ class LoginViewModel @Inject constructor(private val userData: UserData, private
             val result = repository.loginWithAccount()
 
             if (result is Result.Success) {
-                _requestToken.value = result.data.requestToken
+                userData.sessionToken = result.data.sessionId
+                _isSessionActive.value = true
             } else {
                 _loginError.value = R.string.error_account_login
             }
         }
+    }
+
+    fun setRequestToken(requestToken: String?) {
+        userData.requestToken = requestToken
     }
 }

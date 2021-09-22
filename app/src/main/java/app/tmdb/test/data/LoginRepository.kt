@@ -1,5 +1,6 @@
 package app.tmdb.test.data
 
+import app.tmdb.test.data.model.AccountSessionResponse
 import app.tmdb.test.data.model.GuestSessionResponse
 import app.tmdb.test.data.model.RequestTokenResponse
 import app.tmdb.test.data.network.LoginRemoteDataSource
@@ -14,7 +15,11 @@ class LoginRepository @Inject constructor(private val remoteDataSource: LoginRem
         return@withContext remoteDataSource.loginAsGuest()
     }
 
-    suspend fun loginWithAccount(): Result<RequestTokenResponse> = withContext(Dispatchers.IO) {
+    suspend fun requestToken(): Result<RequestTokenResponse> = withContext(Dispatchers.IO) {
+        return@withContext remoteDataSource.requestToken()
+    }
+
+    suspend fun loginWithAccount(): Result<AccountSessionResponse> = withContext(Dispatchers.IO) {
         return@withContext remoteDataSource.loginWithAccount()
     }
 }

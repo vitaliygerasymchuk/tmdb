@@ -27,7 +27,7 @@ class AppModule {
     fun provideLoginRepository(remoteDataSource: LoginRemoteDataSource): LoginRepository = LoginRepository(remoteDataSource)
 
     @Provides
-    fun provideLoginRemoteDataSource(api: Api): LoginRemoteDataSource = LoginRemoteDataSource(api)
+    fun provideLoginRemoteDataSource(api: Api, userData: UserData): LoginRemoteDataSource = LoginRemoteDataSource(api, userData)
 
     @Provides
     @Singleton

@@ -1,18 +1,19 @@
 package app.tmdb.test.ui.login
 
-import android.Manifest
-import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import app.tmdb.test.R
+import app.tmdb.test.data.APPROVED
+import app.tmdb.test.data.AUTHENTICATION_GRANTED
+import app.tmdb.test.data.REQUEST_TOKEN
 import app.tmdb.test.databinding.FragmentLoginBinding
 import app.tmdb.test.ui.AbsFragment
 import app.tmdb.test.utils.Loggable
-import app.tmdb.test.utils.hasPermission
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,17 +22,27 @@ class LoginFragment : AbsFragment<FragmentLoginBinding>(FragmentLoginBinding::in
 
     private val viewModel: LoginViewModel by viewModels()
 
-    private val locationPermissionCall =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
-            //recursion
-            log("onPermissionResult received")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        parentFragmentManager.setFragmentResultListener(AUTHENTICATION_GRANTED, viewLifecycleOwner) { _, bundle ->
+            val wasUserAuthenticated = bundle.getBoolean(APPROVED)
+
+            if (wasUserAuthenticated) {
+                binding.progressBar.visibility = View.VISIBLE
+
+                val requestToken = bundle.getString(REQUEST_TOKEN)
+
+                viewModel.setRequestToken(requestToken)
+                viewModel.loginWithAccount()
+            }
         }
+    }
 
     override fun setUp() {
         with(binding) {
             btnAccountLogin.setOnClickListener {
                 progressBar.visibility = View.VISIBLE
-                viewModel.loginWithAccount()
+                viewModel.getRequestToken()
             }
 
             btnGuestLogin.setOnClickListener {
@@ -39,51 +50,32 @@ class LoginFragment : AbsFragment<FragmentLoginBinding>(FragmentLoginBinding::in
                 viewModel.loginAsGuest()
             }
         }
-
-        askLocationPermission()
     }
 
-    private fun askLocationPermission() {
-        when {
-            hasPermission(Manifest.permission.CAMERA) -> {
-                takePicture()
-            }
-            shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) -> {
-                // showDialog and try again
-            }
-            else -> {
-                locationPermissionCall.launch(Manifest.permission.CAMERA)
-            }
-        }
-    }
-
-    private fun takePicture() {}
-
-    @SuppressLint("QueryPermissionsNeeded")
     override fun setUpObservers() {
-        viewModel.isSessionActive.observe(viewLifecycleOwner, {
+        viewModel.isSessionActive.observe(viewLifecycleOwner, { isSessionActive ->
             binding.progressBar.visibility = View.GONE
-            if (it) findNavController().popBackStack()
+            if (isSessionActive) findNavController().popBackStack()
         })
 
-        viewModel.loginError.observe(viewLifecycleOwner, {
+        viewModel.loginError.observe(viewLifecycleOwner, { message ->
             binding.progressBar.visibility = View.GONE
-            Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
         })
 
         viewModel.requestToken.observe(viewLifecycleOwner, { token ->
             binding.progressBar.visibility = View.GONE
+
             val intent = Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://www.themoviedb.org/authenticate/$token")
+                Uri.parse("https://www.themoviedb.org/authenticate/$token?redirect_to=mycustomscheme://")
             )
+
             try {
                 startActivity(intent)
             } catch (ex: ActivityNotFoundException) {
-                Snackbar.make(requireView(), "App not found", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(requireView(), R.string.error_app_not_found, Snackbar.LENGTH_SHORT).show()
             }
         })
     }
 }
-
-// TODO: 9/19/2021 Redirect to app when authentication is granted.
