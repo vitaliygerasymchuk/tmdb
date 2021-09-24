@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity(), Loggable {
         val wasUserAuthenticated = result?.getQueryParameter("approved")
         val requestToken = result?.getQueryParameter("request_token")
 
+        // if user was authenticated send result to login fragment.
         wasUserAuthenticated?.let {
             if (it == "true") {
                 navHost.childFragmentManager.setFragmentResult(AUTHENTICATION_GRANTED,
