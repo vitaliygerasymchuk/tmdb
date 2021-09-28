@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import app.tmdb.test.App
+import app.tmdb.test.data.UserData
 
 abstract class AbsFragment<V : ViewBinding>(private val inflater: (LayoutInflater, ViewGroup?, Boolean) -> V) : Fragment() {
 
@@ -22,5 +24,4 @@ abstract class AbsFragment<V : ViewBinding>(private val inflater: (LayoutInflate
     abstract fun setUp()
 
     abstract fun setUpObservers()
-
 }

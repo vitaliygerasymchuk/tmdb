@@ -1,13 +1,15 @@
 <resources>
     <string name="app_name">Tmdb</string>
 
-    <string-array name="api_keys">
-        <item>1</item>
-        <item>2</item>
+    <string-array name="api_key">
+        <item>a9e7c415f821126a55689adb36808458</item>
     </string-array>
     <string name="main_fragment">Main Fragment</string>
     <string name="home_fragment">Home Fragment</string>
     <string name="guest_login">Guest Login</string>
-    <string name="login_with_account">Login With Account</string>
+    <string name="login_with_account">Login With TMDB Account</string>
+    <string name="error_guest_login">Error Guest Login</string>
+    <string name="error_account_login">error_account_login</string>
+    <string name="error_app_not_found">App not found</string>
 
 </resources>

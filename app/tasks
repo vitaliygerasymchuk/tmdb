@@ -13,6 +13,9 @@ website with some buttons. After user clicks "Approve", the web page should cont
 Having completed steps above - fire the /authentication/session/new request. It will generate the session_id which should be
 used in order to get data from the TMDB.
 
+
+7) Use WebView to make user authentication on the tmdb web site. Find the way on how to listen for the page events.
+
 Repository:
  1) RemoteDataSource
  2) LocalDataSource

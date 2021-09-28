@@ -1,9 +1,9 @@
 package app.tmdb.test.data.model
 
-//{
-//success: true,
-//expires_at: "2021-09-16 07:23:37 UTC",
-//request_token: "435bd1bb3c8ca0d64421a97f0dbba308d60d5e08"
-//}
-interface RequestTokenResponse {
-}
+import com.squareup.moshi.Json
+
+data class RequestTokenResponse(
+    @field:Json(name = "success") var success: Boolean,
+    @field:Json(name = "request_token") var requestToken: String,
+    @field:Json(name = "expires_at") var expiryDateTime: String,
+)

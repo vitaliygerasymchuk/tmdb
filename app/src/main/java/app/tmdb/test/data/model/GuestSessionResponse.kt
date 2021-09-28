@@ -1,10 +1,9 @@
 package app.tmdb.test.data.model
 
-//{
-//success: true,
-//guest_session_id: "ca2efdd944b587c682166e7e143fdd9f",
-//expires_at: "2021-09-17 06:18:38 UTC"
-//}
+import com.squareup.moshi.Json
 
-interface GuestSessionResponse {
-}
+data class GuestSessionResponse(
+    @field:Json(name = "success") var success: Boolean,
+    @field:Json(name = "guest_session_id") var guestSessionId: String,
+    @field:Json(name = "expires_at") var expiryDateTime: String,
+)
